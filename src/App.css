@@ -1,38 +1,304 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease;
+}
+
+/* Light mode */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Dark mode - applied to body */
+body.dark-mode-active {
+  background-color: #121212 !important;
+}
+
+body.dark-mode-active .App {
+  background: #121212 !important;
+  background-image: none !important;
+}
+
+/* ===== CONTAINERS ===== */
+body.dark-mode-active .home-container,
+body.dark-mode-active .dashboard-container,
+body.dark-mode-active .create-cv-container,
+body.dark-mode-active .profile-card,
+body.dark-mode-active .stats-container,
+body.dark-mode-active .gallery-container,
+body.dark-mode-active .drag-drop-container,
+body.dark-mode-active .active-sections,
+body.dark-mode-active .available-sections,
+body.dark-mode-active .chart-container,
+body.dark-mode-active .summary-card,
+body.dark-mode-active .cv-card,
+body.dark-mode-active .templates-container,
+body.dark-mode-active .gallery-card {
+  background-color: #1e1e1e !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+}
+
+/* ===== HEADINGS - BRIGHT AND VISIBLE ===== */
+body.dark-mode-active h1 {
+  color: #667eea !important;  /* Bright purple for main headings */
+}
+
+body.dark-mode-active h2 {
+  color: #a0a0ff !important;  /* Light purple for subheadings */
+}
+
+body.dark-mode-active h3 {
+  color: #c0c0ff !important;  /* Very light purple */
+}
+
+body.dark-mode-active h4,
+body.dark-mode-active h5,
+body.dark-mode-active h6 {
+  color: #ffffff !important;  /* Pure white */
+}
+
+/* ===== TEXT ELEMENTS ===== */
+body.dark-mode-active p {
+  color: #e0e0e0 !important;  /* Light gray - very readable */
+}
+
+body.dark-mode-active span {
+  color: #d0d0d0 !important;  /* Slightly lighter gray */
+}
+
+body.dark-mode-active label {
+  color: #c0c0ff !important;  /* Light purple for labels */
+  font-weight: 500;
+}
+
+/* ===== LINKS ===== */
+body.dark-mode-active a {
+  color: #90caf9 !important;  /* Light blue for links */
+}
+
+body.dark-mode-active a:hover {
+  color: #bbdefb !important;  /* Even lighter blue on hover */
+}
+
+/* ===== FORM ELEMENTS ===== */
+body.dark-mode-active input,
+body.dark-mode-active textarea,
+body.dark-mode-active select {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+  border: 2px solid #404040 !important;
+}
+
+body.dark-mode-active input::placeholder,
+body.dark-mode-active textarea::placeholder {
+  color: #888 !important;  /* Gray placeholder text */
+}
+
+body.dark-mode-active input:focus,
+body.dark-mode-active textarea:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* ===== BUTTONS ===== */
+body.dark-mode-active .save-btn,
+body.dark-mode-active .edit-btn,
+body.dark-mode-active .pdf-btn,
+body.dark-mode-active .use-template-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+}
+
+body.dark-mode-active .cancel-btn {
+  background: #404040 !important;
+  color: #ffffff !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode-active .delete-btn {
+  background: #dc2626 !important;
+  color: white !important;
+}
+
+/* ===== CARD TEXT ===== */
+body.dark-mode-active .cv-card h3 {
+  color: #667eea !important;  /* Purple for card titles */
+}
+
+body.dark-mode-active .cv-card p {
+  color: #cccccc !important;  /* Light gray for card text */
+}
+
+body.dark-mode-active .cv-card .date {
+  color: #888 !important;  /* Dim gray for dates */
+}
+
+/* ===== STATS AND NUMBERS ===== */
+body.dark-mode-active .stat-number {
+  color: #667eea !important;  /* Bright purple for stats */
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+body.dark-mode-active .stat-trend {
+  color: #4ade80 !important;  /* Bright green for trends */
+}
+
+/* ===== TEMPLATES ===== */
+body.dark-mode-active .template-card h4 {
+  color: #ffffff !important;
+}
+
+body.dark-mode-active .template-description {
+  color: #b0b0b0 !important;  /* Light gray for descriptions */
+}
+
+body.dark-mode-active .template-category {
+  background: #333 !important;
+  color: #a0a0ff !important;
+}
+
+/* ===== DRAG AND DROP ===== */
+body.dark-mode-active .section-title {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+body.dark-mode-active .drag-handle {
+  color: #888 !important;
+}
+
+body.dark-mode-active .toggle-btn.on {
+  background: #667eea !important;
+  color: white !important;
+}
+
+body.dark-mode-active .toggle-btn.off {
+  background: #2d2d2d !important;
+  color: #4ade80 !important;
+  border: 1px solid #4ade80 !important;
+}
+
+/* ===== BADGES AND TAGS ===== */
+body.dark-mode-active .badge,
+body.dark-mode-active .template-badge,
+body.dark-mode-active .selected-badge {
+  background: #667eea !important;
+  color: white !important;
+}
+
+/* ===== NAVBAR ===== */
+body.dark-mode-active .navbar {
+  background: #000000 !important;
+}
+
+body.dark-mode-active .nav-link {
+  color: #ffffff !important;
+}
+
+body.dark-mode-active .nav-link:hover {
+  background: #333 !important;
+  color: #667eea !important;
+}
+
+body.dark-mode-active .nav-logo {
+  color: #667eea !important;
+}
+
+/* ===== LANGUAGE SWITCHER ===== */
+body.dark-mode-active .lang-btn {
+  color: #ffffff !important;
+  border-color: #404040 !important;
+}
+
+body.dark-mode-active .lang-btn.active {
+  background: #667eea !important;
+  color: white !important;
+  border-color: #667eea !important;
+}
+
+/* ===== PREVIEW SECTION ===== */
+body.dark-mode-active .cv-preview {
+  background: #1e1e1e !important;
+}
+
+body.dark-mode-active .cv-preview h3 {
+  color: #667eea !important;
+}
+
+body.dark-mode-active .cv-preview p {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode-active .preview-note {
+  background: #2d2d2d !important;
+  color: #ccc !important;
+}
+
+/* ===== CHARTS ===== */
+body.dark-mode-active .recharts-text {
+  fill: #ffffff !important;
+}
+
+body.dark-mode-active .recharts-cartesian-grid line {
+  stroke: #404040 !important;
+}
+
+body.dark-mode-active .recharts-legend-item text {
+  fill: #ffffff !important;
+}
+
+/* ===== STATUS MESSAGES ===== */
+body.dark-mode-active .status {
+  background: #2d2d2d !important;
+  color: #4ade80 !important;
+}
+
+body.dark-mode-active .error-message {
+  color: #f87171 !important;  /* Bright red for errors */
+}
+
+/* ===== SCROLLBAR ===== */
+body.dark-mode-active ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.dark-mode-active ::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+body.dark-mode-active ::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 5px;
+}
+
+body.dark-mode-active ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 1000;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }

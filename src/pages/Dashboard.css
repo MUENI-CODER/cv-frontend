@@ -1,0 +1,162 @@
+﻿.dashboard-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.dashboard-container h1 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+.cv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.cv-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+}
+
+.template-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #667eea;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
+.cv-card h3 {
+  color: #667eea;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+  padding-right: 80px;
+}
+
+.cv-card p {
+  color: #666;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.cv-card .date {
+  color: #999;
+  font-size: 0.85em;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.edit-btn, .pdf-btn, .delete-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+}
+
+.edit-btn {
+  background: #667eea;
+  color: white;
+  flex: 2;
+}
+
+.edit-btn:hover {
+  background: #5a67d8;
+  transform: scale(1.02);
+}
+
+.pdf-btn {
+  background: #48bb78;
+  color: white;
+  flex: 2;
+}
+
+.pdf-btn:hover {
+  background: #38a169;
+  transform: scale(1.02);
+}
+
+.delete-btn {
+  background: #ff4757;
+  color: white;
+  flex: 1;
+  font-size: 1.1em;
+}
+
+.delete-btn:hover {
+  background: #ff3838;
+  transform: scale(1.02);
+}
+
+.cv-card.new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px dashed #667eea;
+  background: #f8f9fa;
+  min-height: 200px;
+}
+
+.cv-card.new:hover {
+  background: #e8f4fd;
+}
+
+.cv-card.new h3 {
+  color: #667eea;
+  margin: 0;
+  padding: 0;
+}
+.share-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 2;
+}
+
+.share-btn:hover {
+  background: #059669;
+  transform: scale(1.02);
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.edit-btn, .pdf-btn, .share-btn, .delete-btn {
+  flex: 1;
+  min-width: 80px;
+}
