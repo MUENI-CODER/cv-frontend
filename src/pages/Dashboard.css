@@ -160,3 +160,13 @@
   flex: 1;
   min-width: 80px;
 }
+.error-message {
+  background: #fee;
+  color: #c33;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px;
+  font-size: 1.1em;
+  border: 1px solid #fcc;
+}

@@ -5,7 +5,7 @@ import Templates from '../components/Templates';
 import CVPreview from '../components/CVPreview';
 import './CreateCV.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
+const API_URL = process.env.REACT_APP_API_URL || 'https://cv-backend-vcs8.onrender.com';
 
 function CreateCV() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ function CreateCV() {
   });
 
   const [showPreview, setShowPreview] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (cvToEdit) {
@@ -59,30 +60,43 @@ function CreateCV() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please login first');
+      navigate('/login');
+      return;
+    }
+
     try {
       const response = await fetch(API_URL + '/api/cvs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(formData)
       });
       
       if (response.ok) {
-        alert('✅ CV Saved Successfully!');
+        alert('CV Saved Successfully!');
         navigate('/dashboard');
       } else {
-        alert('❌ Error saving CV');
+        const error = await response.json();
+        alert('Error: ' + (error.error || 'Failed to save CV'));
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Error connecting to server');
+      alert('Network error. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="create-cv-container" style={{ maxWidth: '1400px' }}>
-      <h1>{cvToEdit ? 'Edit CV' : t.cvForm.title}</h1>
+      <h1>{cvToEdit ? 'Edit CV' : 'Create Your CV'}</h1>
       
       <Templates 
         onSelectTemplate={handleTemplateSelect}
@@ -93,7 +107,7 @@ function CreateCV() {
         <div style={{ flex: '1' }}>
           <form onSubmit={handleSubmit} className="cv-form">
             <div className="form-group">
-              <label>{t.cvForm.cvTitle} <span className="required">*</span></label>
+              <label>CV Title <span className="required">*</span></label>
               <input
                 type="text"
                 name="title"
@@ -105,7 +119,7 @@ function CreateCV() {
 
             <div className="form-row">
               <div className="form-group">
-                <label>{t.cvForm.fullName} <span className="required">*</span></label>
+                <label>Full Name <span className="required">*</span></label>
                 <input
                   type="text"
                   name="fullName"
@@ -116,7 +130,7 @@ function CreateCV() {
               </div>
 
               <div className="form-group">
-                <label>{t.cvForm.email} <span className="required">*</span></label>
+                <label>Email <span className="required">*</span></label>
                 <input
                   type="email"
                   name="email"
@@ -128,7 +142,7 @@ function CreateCV() {
             </div>
 
             <div className="form-group">
-              <label>{t.cvForm.phone}</label>
+              <label>Phone</label>
               <input
                 type="tel"
                 name="phone"
@@ -138,7 +152,7 @@ function CreateCV() {
             </div>
 
             <div className="form-group">
-              <label>{t.cvForm.summary}</label>
+              <label>Professional Summary</label>
               <textarea
                 name="summary"
                 value={formData.summary}
@@ -148,7 +162,7 @@ function CreateCV() {
             </div>
 
             <div className="form-group">
-              <label>{t.cvForm.experience}</label>
+              <label>Work Experience</label>
               <textarea
                 name="experience"
                 value={formData.experience}
@@ -158,7 +172,7 @@ function CreateCV() {
             </div>
 
             <div className="form-group">
-              <label>{t.cvForm.education}</label>
+              <label>Education</label>
               <textarea
                 name="education"
                 value={formData.education}
@@ -168,7 +182,7 @@ function CreateCV() {
             </div>
 
             <div className="form-group">
-              <label>{t.cvForm.skills}</label>
+              <label>Skills</label>
               <textarea
                 name="skills"
                 value={formData.skills}
@@ -178,7 +192,9 @@ function CreateCV() {
             </div>
 
             <div className="form-buttons">
-              <button type="submit" className="save-btn">💾 Save CV</button>
+              <button type="submit" className="save-btn" disabled={loading}>
+                {loading ? 'Saving...' : (cvToEdit ? 'Update CV' : 'Save CV')}
+              </button>
               <button type="button" className="cancel-btn" onClick={() => navigate('/dashboard')}>
                 Cancel
               </button>
@@ -187,7 +203,7 @@ function CreateCV() {
                 className="preview-btn"
                 onClick={() => setShowPreview(!showPreview)}
               >
-                {showPreview ? '📝 Hide Preview' : '👁️ Show Preview'}
+                {showPreview ? 'Hide Preview' : 'Show Preview'}
               </button>
             </div>
           </form>

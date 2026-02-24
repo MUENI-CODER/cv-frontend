@@ -1,31 +1,36 @@
-﻿.templates-container {
+﻿.templates-section {
   margin: 30px 0;
   padding: 20px;
   background: #f8fafc;
   border-radius: 16px;
 }
 
+.templates-section h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.3em;
+}
+
 .templates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 15px;
-  margin-top: 15px;
 }
 
 .template-card {
   background: white;
-  border: 2px solid #e2e8f0;
+  border: 2px solid #e0e0e0;
   border-radius: 12px;
   padding: 15px;
   cursor: pointer;
-  text-align: center;
   transition: all 0.3s ease;
   position: relative;
+  text-align: center;
 }
 
 .template-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
 }
 
 .template-card.selected {
@@ -34,20 +39,34 @@
 }
 
 .template-preview {
-  height: 80px;
+  height: 100px;
   border-radius: 8px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 2em;
+  font-size: 2.5em;
+}
+
+.template-icon {
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
 }
 
 .template-card h4 {
   color: #333;
-  margin: 0;
+  margin: 5px 0;
   font-size: 0.95em;
+}
+
+.template-category {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #f0f0f0;
+  color: #666;
+  border-radius: 4px;
+  font-size: 0.7em;
+  margin-top: 5px;
 }
 
 .selected-badge {
@@ -63,4 +82,27 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
+}
+
+/* Dark mode */
+.App.dark-mode .templates-section {
+  background: #2d2d2d;
+}
+
+.App.dark-mode .templates-section h3 {
+  color: #fff;
+}
+
+.App.dark-mode .template-card {
+  background: #2d2d2d;
+  border-color: #404040;
+}
+
+.App.dark-mode .template-card h4 {
+  color: #fff;
+}
+
+.App.dark-mode .template-category {
+  background: #404040;
+  color: #ccc;
 }

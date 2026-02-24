@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>CV Management System</title>
+    <style>
+      /* FORCE DARK MODE STYLES */
+      .App.dark-mode {
+        background-color: #121212 !important;
+        min-height: 100vh;
+      }
+      
+      .App.dark-mode .home-container,
+      .App.dark-mode .dashboard-container,
+      .App.dark-mode .create-cv-container,
+      .App.dark-mode .profile-card,
+      .App.dark-mode .cv-card {
+        background-color: #1e1e1e !important;
+        color: white !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+      }
+      
+      .App.dark-mode h1,
+      .App.dark-mode h2,
+      .App.dark-mode h3,
+      .App.dark-mode p,
+      .App.dark-mode label {
+        color: white !important;
+      }
+      
+      .App.dark-mode .navbar {
+        background-color: #000000 !important;
+      }
+      
+      .App.dark-mode input,
+      .App.dark-mode textarea {
+        background-color: #333333 !important;
+        color: white !important;
+        border: 1px solid #555 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

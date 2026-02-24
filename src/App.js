@@ -1,6 +1,8 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
+import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './context/AuthContext';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -11,8 +13,24 @@ import TemplatesGallery from './pages/TemplatesGallery';
 import StatsDashboard from './pages/StatsDashboard';
 import DragDropCV from './pages/DragDropCV';
 import PublicCV from './pages/PublicCV';
+import Login from './pages/Login';
 
-function App() {
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+  
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+  
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+  
+  return children;
+};
+
+function AppContent() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -28,28 +46,59 @@ function App() {
   };
 
   return (
+    <div className={App }>
+      <button
+        onClick={toggleDarkMode}
+        className="theme-toggle"
+      >
+        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+      </button>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/templates" element={<TemplatesGallery />} />
+        <Route path="/cv/:shareId" element={<PublicCV />} />
+        
+        {/* Protected Routes */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/create-cv" element={
+          <ProtectedRoute>
+            <CreateCV />
+          </ProtectedRoute>
+        } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+        <Route path="/stats" element={
+          <ProtectedRoute>
+            <StatsDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/layout" element={
+          <ProtectedRoute>
+            <DragDropCV />
+          </ProtectedRoute>
+        } />
+      </Routes>
+    </div>
+  );
+}
+
+function App() {
+  return (
     <LanguageProvider>
-      <Router>
-        <div className={App }>
-          <button
-            onClick={toggleDarkMode}
-            className="theme-toggle"
-          >
-            {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
-          </button>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create-cv" element={<CreateCV />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/templates" element={<TemplatesGallery />} />
-            <Route path="/stats" element={<StatsDashboard />} />
-            <Route path="/layout" element={<DragDropCV />} />
-            <Route path="/cv/:shareId" element={<PublicCV />} />
-          </Routes>
-        </div>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </AuthProvider>
     </LanguageProvider>
   );
 }
