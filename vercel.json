@@ -1,0 +1,9 @@
+﻿{
+  "buildCommand": "CI=false && react-scripts build",
+  "outputDirectory": "build",
+  "devCommand": "react-scripts start",
+  "installCommand": "npm install",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
